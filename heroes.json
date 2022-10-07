@@ -17,6 +17,12 @@
       "name": "Тест герой",
       "description": "sdfsdf",
       "element": "fire"
+    },
+    {
+      "id": "4209a184-18c6-436f-b318-f72d25148261",
+      "name": "Тест герой",
+      "description": "ываыва",
+      "element": "water"
     }
   ],
   "filters": [

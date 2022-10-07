@@ -1,7 +1,9 @@
 import { useHttp } from '../../hooks/http.hook';
-import { useDispatch } from 'react-redux';
-import { filtersFetched, filtersFetching, filtersFetchingError } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { filtersFetched, filtersFetching, filtersFetchingError, filterChanged } from '../../actions';
 import { useEffect } from 'react';
+import Spinner from '../spinner/Spinner';
+import classNames from 'classnames';
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -12,6 +14,7 @@ import { useEffect } from 'react';
 const HeroesFilters = () => {
     const { request } = useHttp();
     const dispatch = useDispatch();
+    const { filters, filtersLoadingStatus, activeFilter } = useSelector(state => state)
 
     useEffect(() => {
         dispatch(filtersFetching());
@@ -20,16 +23,40 @@ const HeroesFilters = () => {
             .catch(() => dispatch(filtersFetchingError()))
     }, []);
 
+    if (filtersLoadingStatus === "loading") {
+        return <Spinner />;
+    } else if (filtersLoadingStatus === "error") {
+        return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+    }
+
+    const renderFilter = (filters) => {
+        if (filters.legnth === 0) {
+            return <h5 className="text-center mt-5">Нет доступных фильтров</h5>
+        }
+
+        return filters.map(({ className, label, name }) => {
+            const btnClass = classNames('btn', className, {
+                active: name === activeFilter
+            });
+            return (
+                <button
+                    className={btnClass}
+                    key={name}
+                    name={name}
+                    onClick={() => dispatch(filterChanged(name))}
+                >{label}</button>
+            )
+        })
+    }
+
+    const elements = renderFilter(filters);
+
     return (
         <div className="card shadow-lg mt-4">
             <div className="card-body">
                 <p className="card-text">Отфильтруйте героев по элементам</p>
                 <div className="btn-group">
-                    <button className="btn btn-outline-dark active">Все</button>
-                    <button className="btn btn-danger">Огонь</button>
-                    <button className="btn btn-primary">Вода</button>
-                    <button className="btn btn-success">Ветер</button>
-                    <button className="btn btn-secondary">Земля</button>
+                    {elements}
                 </div>
             </div>
         </div>
