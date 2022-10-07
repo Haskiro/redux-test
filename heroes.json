@@ -19,10 +19,16 @@
       "element": "fire"
     },
     {
-      "id": "4209a184-18c6-436f-b318-f72d25148261",
+      "id": "50f5050e-275c-48cc-a5c3-84b04e3ba41d",
       "name": "Тест герой",
+      "description": "sdfjlkjsdaf",
+      "element": "wind"
+    },
+    {
+      "id": "780033fb-376a-46fd-aecd-b337bed8b359",
+      "name": "Земляной троль",
       "description": "ываыва",
-      "element": "water"
+      "element": "earth"
     }
   ],
   "filters": [

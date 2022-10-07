@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useHttp } from '../../hooks/http.hook';
 import { useDispatch } from 'react-redux';
 import { heroAdded } from '../../actions'
+import { useSelector } from 'react-redux';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -21,12 +22,20 @@ const HeroesAddForm = () => {
 
     const { request } = useHttp();
     const dispatch = useDispatch();
+    const filters = useSelector(state => state.filters).filter(item => item.name !== 'all');
+
 
     // Хитровыебаный метод для изменения state, связанного с каждым из полей. Написан по приколу, не рационален и не читабелен
     // const onChangeField = (e, i) => {
     //     const setter = 'set' + refList.current[i].name[0].toUpperCase() + refList.current[i].name.substr(1);
     //     eval(`${setter}(${"'" + e.target.value + "'"})`);
     // }
+
+    const renderFilters = (filtes) => {
+        return (
+            filters.map(({ name, label }) => (<option value={name} key={name}>{label}</option>))
+        );
+    }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -83,10 +92,7 @@ const HeroesAddForm = () => {
                     id="element"
                     name="element">
                     <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    {renderFilters(filters)}
                 </select>
             </div>
 
