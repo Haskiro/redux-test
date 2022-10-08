@@ -22,7 +22,7 @@ const HeroesAddForm = () => {
 
     const { request } = useHttp();
     const dispatch = useDispatch();
-    const filters = useSelector(state => state.filters).filter(item => item.name !== 'all');
+    const filters = useSelector(state => state.filters.filters).filter(item => item.name !== 'all');
 
 
     // Хитровыебаный метод для изменения state, связанного с каждым из полей. Написан по приколу, не рационален и не читабелен

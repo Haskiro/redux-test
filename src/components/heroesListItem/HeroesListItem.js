@@ -10,8 +10,6 @@ const HeroesListItem = ({ name, description, element, onDelete }) => {
 
     });
 
-    console.log(elementClassName)
-
     return (
         <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
