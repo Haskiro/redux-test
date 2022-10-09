@@ -1,3 +1,5 @@
+//uneUsed compolex action creators. replaced with createAsyncThunk
+
 import { heroesFetched, heroesFetching, heroesFetchingError } from '../components/heroesList/heroesSlice';
 import { filtersFetching, filtersFetched, filtersFetchingError } from '../components/heroesFilters/filtersSlice';
 
