@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useHttp } from '../../hooks/http.hook';
 import { useDispatch } from 'react-redux';
 import { heroAdded } from '../heroesList/heroesSlice'
-import { useSelector } from 'react-redux';
+import { selectAll } from '../heroesFilters/filtersSlice';
+import store from '../../store';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -22,7 +23,7 @@ const HeroesAddForm = () => {
 
     const { request } = useHttp();
     const dispatch = useDispatch();
-    const filters = useSelector(state => state.filters.filters).filter(item => item.name !== 'all');
+    const filters = selectAll(store.getState()).filter(item => item.name !== 'all');
 
 
     // Хитровыебаный метод для изменения state, связанного с каждым из полей. Написан по приколу, не рационален и не читабелен

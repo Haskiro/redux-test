@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { heroDeleted, fetchHeroes } from './heroesSlice';
+import { heroDeleted, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 import { useCallback } from 'react';
-import { createSelector } from '@reduxjs/toolkit';
 import { useHttp } from '../../hooks/http.hook';
 
 // Задача для этого компонента:
@@ -14,15 +13,6 @@ import { useHttp } from '../../hooks/http.hook';
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-    const filteredHeroesSelector = createSelector(
-        state => state.heroes.heroes,
-        state => state.filters.activeFilter,
-        (heroes, activeFilter) => {
-            if (activeFilter === 'all') return heroes;
-            return heroes.filter(item => item.element === activeFilter);
-        }
-    )
-
     const filteredHeroes = useSelector(filteredHeroesSelector);
 
     const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
@@ -38,7 +28,6 @@ const HeroesList = () => {
 
 
     const onDeleteItem = useCallback((id) => {
-        dispatch(heroDeleted(id));
         request(`http://localhost:3001/heroes/${id}`, 'DELETE')
             .then(data => console.log(data, 'Deleted'))
             .then(dispatch(heroDeleted(id)))

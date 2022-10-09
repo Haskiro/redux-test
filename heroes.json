@@ -13,46 +13,45 @@
       "element": "wind"
     },
     {
-      "id": "c85592a5-7454-4f7c-8200-3f5e3bd8d442",
-      "name": "Тест герой",
-      "description": "sdfsdf",
-      "element": "fire"
-    },
-    {
-      "id": "39a65f01-a577-49dd-bd5b-e363fb2f1ae2",
-      "name": "Просто чел",
-      "description": "Ничего",
-      "element": "wind"
-    },
-    {
       "id": "6b70f068-f147-4aa1-b3c2-d455a17965d6",
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
+    },
+    {
+      "id": "555424c1-5fd7-4f16-aa02-6dfd3877a7cb",
+      "name": "Хохотун",
+      "description": "Смешной чел, позитивный",
+      "element": "earth"
     }
   ],
   "filters": [
     {
+      "id": "all",
       "name": "all",
       "label": "Все",
       "className": "btn-outline-dark"
     },
     {
+      "id": "fire",
       "name": "fire",
       "label": "Огонь",
       "className": "btn-danger"
     },
     {
+      "id": "water",
       "name": "water",
       "label": "Вода",
       "className": "btn-primary"
     },
     {
+      "id": "wind",
       "name": "wind",
       "label": "Ветер",
       "className": "btn-success"
     },
     {
+      "id": "earth",
       "name": "earth",
       "label": "Земля",
       "className": "btn-secondary"

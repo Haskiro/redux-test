@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { filterChanged, fetchFilters } from './filtersSlice';
+import { filterChanged, fetchFilters, selectAll } from './filtersSlice';
 import { useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import classNames from 'classnames';
+import store from '../../store';
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -13,7 +14,8 @@ import classNames from 'classnames';
 const HeroesFilters = () => {
 
     const dispatch = useDispatch();
-    const { filters, filtersLoadingStatus, activeFilter } = useSelector(state => state.filters)
+    const filters = selectAll(store.getState())
+    const { filtersLoadingStatus, activeFilter } = useSelector(state => state.filters)
 
     useEffect(() => {
         dispatch(fetchFilters());
