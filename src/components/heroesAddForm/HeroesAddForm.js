@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useHttp } from '../../hooks/http.hook';
 import { useDispatch } from 'react-redux';
-import { heroAdded } from '../../actions'
+import { heroAdded } from '../heroesList/heroesSlice'
 import { useSelector } from 'react-redux';
 
 // Задача для этого компонента:
