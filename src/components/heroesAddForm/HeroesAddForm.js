@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useHttp } from '../../hooks/http.hook';
-import { useDispatch } from 'react-redux';
-import { heroAdded } from '../heroesList/heroesSlice'
 import { selectAll } from '../heroesFilters/filtersSlice';
+import { useAddHeroMutation } from '../../api/apiSlice';
 import store from '../../store';
 
 // Задача для этого компонента:
@@ -21,8 +19,8 @@ const HeroesAddForm = () => {
     const [description, setDescription] = useState('');
     const [element, setElemenet] = useState('');
 
-    const { request } = useHttp();
-    const dispatch = useDispatch();
+    const [addHero] = useAddHeroMutation();
+
     const filters = selectAll(store.getState()).filter(item => item.name !== 'all');
 
 
@@ -32,7 +30,7 @@ const HeroesAddForm = () => {
     //     eval(`${setter}(${"'" + e.target.value + "'"})`);
     // }
 
-    const renderFilters = (filtes) => {
+    const renderFilters = (filters) => {
         return (
             filters.map(({ name, label }) => (<option value={name} key={name}>{label}</option>))
         );
@@ -48,9 +46,11 @@ const HeroesAddForm = () => {
             element: element
         }
 
-        request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
-            .then(dispatch(heroAdded(newHero)))
-            .catch(err => console.log(err));
+        addHero(newHero).unwrap();
+
+        // request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
+        //     .then(dispatch(heroAdded(newHero)))
+        //     .catch(err => console.log(err));
 
 
     }
